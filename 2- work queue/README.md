@@ -53,3 +53,17 @@ ch.assertQueue('hello', {durable: true});
 ch.prefetch(1);
 ```
 
+##### reject
+default requeue
+
+```
+ch.reject(msg)
+```
+
+
+default non-requeue
+
+```
+ch.reject(msg,false)
+```
+

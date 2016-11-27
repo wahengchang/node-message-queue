@@ -10,12 +10,18 @@ amqp.connect('amqp://localhost', function(err, conn) {
     ch.consume(q, function(msg) {
       // var secs = msg.content.toString().split('.').length - 1;
       var secs = 3;
-
-      console.log(" [x] Received %s", msg.content.toString());
-      setTimeout(function() {
-        console.log(" [x] Done");
-        ch.ack(msg);
-      }, secs * 1000);
+      var _MESSAGE = msg.content.toString();
+      if(_MESSAGE !== ''){
+        console.log(" [x] Received %s", _MESSAGE);
+        setTimeout(function() {
+          console.log(" [x] Done");
+          ch.ack(msg);
+        }, secs * 1000);
+      }
+      else {
+        console.log(' FAIL: empty string ....');
+        ch.reject(msg, false)
+      }
     }, {noAck: false});
   });
 });
