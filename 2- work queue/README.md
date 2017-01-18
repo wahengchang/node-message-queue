@@ -67,3 +67,17 @@ default non-requeue
 ch.reject(msg,false)
 ```
 
+
+
+##Note
+  - _**ack**_ will acknowledge the message, which tells RabbitMQ that this message has been handled. 
+ RabbitMQ will mark the message as acknowledged, and remove it from the queue permanently. (see https://www.rabbitmq.com/amqp-0-9-1-reference.html#basic.ack)
+
+  - _**nack**_ is a "negative acknowledge" or "not acknowledged" - this tells RabbitMQ that the message was not handled properly. By default, **'nack' will put the message back in the queue** for later handling. 
+  can also force the message to not requeue with 'nack'. (see https://www.rabbitmq.com/amqp-0-9-1-reference.html#basic.nack)
+
+  - _**reject**_  is an explicit "not acknowledged" and do not requeue (by default). 
+ RabbitMQ will drop the message from the queue entirely, as the message will not be processable in that queue. you can specify a 'requeue' parameter for reject, like nack. (see https://www.rabbitmq.com/amqp-0-9-1-reference.html#basic.reject)
+
+  - The advantage of 'nack' over reject is that nack works with mutliple messages if you want it to. reject, i think, is for a single message.
+
