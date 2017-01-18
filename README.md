@@ -4,6 +4,9 @@
 _**RabbitMQ monitor UI**_
 ```
 $ rabbitmq-plugins  enable rabbitmq_management
+
+//rabbitmqctl reset
+
 //open url below on browser
 //http://localhost:15672
 //default user/password
